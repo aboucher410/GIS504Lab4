@@ -6,3 +6,16 @@ html, body, #map {
     height: 100%;
     width: 100vw;
 }
+body {
+    background-color: #ffffff;
+    color: #272727;
+}
+
+.night-mode body {
+    background-color: #272727;
+    color: #ffffff;
+}
+
+.night-mode a {
+    color: #e5e5e5;
+}

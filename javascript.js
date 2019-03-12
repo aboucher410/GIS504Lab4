@@ -49,3 +49,44 @@ map.locate({
   timeout: 20000, // this option specifies when the browser will stop attempting to get a fix on the device's location. Units are miliseconds. Change this to 5000 and test the change. Before you submit, change this to 15000.
   watch: false, // you can set this option from false to true to track a user's movement over time instead of just once. For our purposes, however, leave this option as is.
 });
+
+//this is the nightmode that I found online: https://jsfiddle.net/cferdinandi/oxu0cqk6/3/
+;(function (window, document, undefined) {
+	'use strict';
+	if (!('localStorage' in window)) return;
+	var nightMode = localStorage.getItem('gmtNightMode');
+	if (nightMode) {
+		document.documentElement.className += ' night-mode';
+	}
+})(window, document);
+
+;(function (window, document, undefined) {
+
+	'use strict';
+
+	// Feature test
+	if (!('localStorage' in window)) return;
+
+	// Get the navigation menu
+	//var nav = document.querySelector('#menu-primary');
+	//if (!nav) return;
+
+	// Insert the night mode toggle
+	nav.innerHTML += '<li id="night-mode"><a role="button" href="#">Toggle Night Mode</a></li>';
+
+	// Get our newly insert toggle
+	var nightMode = document.querySelector('#night-mode');
+	if (!nightMode) return;
+
+	// When clicked, toggle night mode on or off
+	nightMode.addEventListener('click', function (event) {
+		event.preventDefault();
+		document.documentElement.classList.toggle('night-mode');
+		if ( document.documentElement.classList.contains('night-mode') ) {
+			localStorage.setItem('gmtNightMode', true);
+			return;
+		}
+		localStorage.removeItem('gmtNightMode');
+	}, false);
+
+})(window, document);
