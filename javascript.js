@@ -68,8 +68,8 @@ map.locate({
 	if (!('localStorage' in window)) return;
 
 	// Get the navigation menu
-	//var nav = document.querySelector('#menu-primary');
-	//if (!nav) return;
+var nav = document.querySelector('#menu-primary');
+if (!nav) return;
 
 	// Insert the night mode toggle
 	nav.innerHTML += '<li id="night-mode"><a role="button" href="#">Toggle Night Mode</a></li>';
