@@ -4,13 +4,13 @@ alert('If you give it permission, this web page will access to your location in 
 
 var map = L.map('map').fitWorld(); //Here we initialize the map in the "map" div defined in the html body. Below, we call in Mapbox tiles and use the options to set the max zoom to 18, include our attribution, specify that the tiles set we want is mapbox.streets, and provide the access token for Mapbox's API
 
-L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9.html?fresh=true&title=true&access_token=pk.eyJ1IjoiYWIxMCIsImEiOiJjam82YTJ0MHMwMGt0M3ZwNzYzZzlsa3EyIn0.HPi2gOsi8dSiVUPnCNIuLw#0.0/0.000000/0.000000/0', {
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}' , {
   maxZoom: 18,
   attribution: 'Map data &copy; <a href="mapbox://styles/mapbox/outdoors-v9">Outdoors</a> contributors, ' +
     '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   id: 'mapbox.outdoors', // experiment with changing this to mapbox.light, mapbox.dark, mapbox.satellite, etc.
-  accessToken: 'pk.eyJ1IjoiYWIxMCIsImEiOiJjam82YTJ0MHMwMGt0M3ZwNzYzZzlsa3EyIn0.HPi2gOsi8dSiVUPnCNIuLw' //this is a generic access token, but when you deploy projects of your own, you must get a unique key that is tied to your Mapbox account
+  accessToken: 'pk.eyJ1IjoiYWIxMCIsImEiOiJjanN3ZXZua3cwZ3ppNDNwcjd4aGRpMGR0In0.FPuUGMHZEG23LWr-NWhfbA' //this is a generic access token, but when you deploy projects of your own, you must get a unique key that is tied to your Mapbox account
 }).addTo(map);
 
 //the below JS code takes advantage of the Geolocate API as it is incorporated in the Leaflet JS API with the locate method
@@ -29,13 +29,19 @@ function onLocationFound(e) { //this function does three things if the location 
   }
   else{
       L.circle(e.latlng, radius, {color: 'green'}).addTo(map);
-  } */
+  }
   //this adds a Leaflet circle to the map at the lat and long returned by the locate function. Its radius is set to the var radius defined above. If the radius is less than 30, the color of the circle is blue. If it is more than 30, the color is red. Comment out the line of code that adds the simple circle and uncomment the seven lines of code that enable the responsively colored circle. NOTE: there are two syntax errors in the code that you must correct in order for it to function.
 }
 
 function onLocationError(e) {
   alert(e.message);
-}
+  // ab. Added:Check to see if the browser supports the GeoLocation API.
+if (navigator.geolocation) {
+
+} else {
+  // Print out a message to the user.
+  document.write('Your browser does not support GeoLocation');
+}}
 //this function runs if the location is not found when the locate method is called. It produces an alert window that reports the error
 
 //these are event listeners that call the functions above depending on whether or not the locate method is successful
@@ -51,42 +57,3 @@ map.locate({
 });
 
 //this is the nightmode that I found online: https://jsfiddle.net/cferdinandi/oxu0cqk6/3/
-;(function (window, document, undefined) {
-	'use strict';
-	if (!('localStorage' in window)) return;
-	var nightMode = localStorage.getItem('gmtNightMode');
-	if (nightMode) {
-		document.documentElement.className += ' night-mode';
-	}
-})(window, document);
-
-;(function (window, document, undefined) {
-
-	'use strict';
-
-	// Feature test
-	if (!('localStorage' in window)) return;
-
-	// Get the navigation menu
-var nav = document.querySelector('#menu-primary');
-if (!nav) return;
-
-	// Insert the night mode toggle
-	nav.innerHTML += '<li id="night-mode"><a role="button" href="#">Toggle Night Mode</a></li>';
-
-	// Get our newly insert toggle
-	var nightMode = document.querySelector('#night-mode');
-	if (!nightMode) return;
-
-	// When clicked, toggle night mode on or off
-	nightMode.addEventListener('click', function (event) {
-		event.preventDefault();
-		document.documentElement.classList.toggle('night-mode');
-		if ( document.documentElement.classList.contains('night-mode') ) {
-			localStorage.setItem('gmtNightMode', true);
-			return;
-		}
-		localStorage.removeItem('gmtNightMode');
-	}, false);
-
-})(window, document);

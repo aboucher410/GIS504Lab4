@@ -14,16 +14,26 @@
 </head>
 <body>
 
-<div id="map"></div>
-<div class="span9" style="height:100%">
-			 <div id="map"></div>
-			 <div style="padding-left: 10px;padding-right: 10px">
-					 <input type="button" id="Btn1" value="Btn1" onclick="info" class="btnStyle span3" />
-					 <input type="button" id="Btn3" value="Btn3" onclick="locate" class="btnStyle span3" />
-					 <span id="studentsCount" class="lblStyle span3"> Ikke rutesat: </span>
-			 </div>
-	 </div>
-	 //got the above code from stackoverflow and removed one button in the middle 0https://stackoverflow.com/questions/17942889/how-to-put-buttons-on-the-leaflet-map.
+
+<div id='map'></div>
+<!--got the above code from stackoverflow and removed one button in the middle 0https://stackoverflow.com/questions/17942889/how-to-put-buttons-on-the-leaflet-map.-->
+	<div style="padding-left: 10px;padding-right: 10px">
+		 <input type="button" id="Btn1" value="Info" onclick="info" class="btnStyle span3" />
+		 <input type="button" id="Btn3" value="Locate" onclick="locate" class="btnStyle span3" />
+ 	</div>
+
+	<script>
+	/*mapboxgl.accessToken = 'pk.eyJ1IjoiYWIxMCIsImEiOiJjam82YTJ0MHMwMGt0M3ZwNzYzZzlsa3EyIn0.HPi2gOsi8dSiVUPnCNIuLw';
+	const map = new mapboxgl.Map({
+	  container: 'map',
+	  style: 'mapbox://styles/mapbox/outdoors-v9',
+	  center: [0.000000, 0.000000],
+	  zoom: 0.0
+	});
+
+*/
+	</script>
+</div>
 <script src="javascript.js"></script>
 
 </body>
