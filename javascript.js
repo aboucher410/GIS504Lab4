@@ -13,13 +13,14 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: 'pk.eyJ1IjoiYWIxMCIsImEiOiJjanN3ZXZua3cwZ3ppNDNwcjd4aGRpMGR0In0.FPuUGMHZEG23LWr-NWhfbA' //this is a generic access token, but when you deploy projects of your own, you must get a unique key that is tied to your Mapbox account
 }).addTo(map);
 
+
 //the below JS code takes advantage of the Geolocate API as it is incorporated in the Leaflet JS API with the locate method
 function onLocationFound(e) { //this function does three things if the location is found: it defines a radius variable, adds a popup to the map, and adds a circle to the map.
 
   var radius = e.accuracy / 2; //this defines a variable radius as the accuracy value returned by the locate method divided by 2. It is divided by 2 because the accuracy value is the sum of the estimated accuracy of the latitude plus the estimated accuracy of the longitude. The unit is meters.
 
   L.marker(e.latlng).addTo(map)
-    .bindPopup("You are within 2 meters" + radius + " of this point.").openPopup();
+    .bindPopup("You are within " + radius + " feet of this point.").openPopup();
   //this adds a Leaflet popup to the map at the lat and long returned by the locate function. The text of the popup is defined here as well. Please change this text to specify what unit the radius is reported in.
 
   L.circle(e.latlng, radius).addTo(map); // this adds a Leaflet circle to the map at the lat and long returned by the locate function. Its radius is set to the var radius defined above.
@@ -55,5 +56,3 @@ map.locate({
   timeout: 20000, // this option specifies when the browser will stop attempting to get a fix on the device's location. Units are miliseconds. Change this to 5000 and test the change. Before you submit, change this to 15000.
   watch: false, // you can set this option from false to true to track a user's movement over time instead of just once. For our purposes, however, leave this option as is.
 });
-
-//this is the nightmode that I found online: https://jsfiddle.net/cferdinandi/oxu0cqk6/3/
